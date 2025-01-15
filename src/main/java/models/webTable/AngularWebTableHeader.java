@@ -1,7 +1,11 @@
 package models.webTable;
 
+import lombok.Builder;
+import lombok.Data;
 import org.openqa.selenium.WebElement;
 
+@Data
+@Builder
 public class AngularWebTableHeader {
   private WebElement searchBarElement;
   private WebElement addUserElement;

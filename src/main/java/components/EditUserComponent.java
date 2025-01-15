@@ -2,10 +2,13 @@ package components;
 
 import static java.util.stream.Collectors.*;
 
+import enums.UserRoles;
 import java.util.List;
 import models.form.EditUserForm;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.TestException;
 
 public class EditUserComponent {
   @FindBy(xpath = "//input[@name='FirstName']")
@@ -38,6 +41,13 @@ public class EditUserComponent {
   @FindBy(xpath = "//button[text()='Save']")
   private WebElement saveButton;
 
+  @FindBy(xpath = "//form[@name='smartTableValidForm']")
+  private WebElement formElement;
+
+  public boolean isFormLoaded() {
+    return formElement.isDisplayed();
+  }
+
   public EditUserForm readEditUserForm() {
     return EditUserForm.builder()
         .firstName(firstName.getText())
@@ -59,5 +69,26 @@ public class EditUserComponent {
         .closeButton(closeButton)
         .saveButton(saveButton)
         .build();
+  }
+
+  public void changeUserRoleTo(UserRoles roleName) {
+    Select roleSelect = new Select(role);
+    roleSelect.selectByValue(roleName.name());
+  }
+
+  public void changeUserCompanyTo(String companyName) {
+    customerList.stream()
+        .filter(cn -> cn.getText().equals(companyName))
+        .findFirst()
+        .orElseThrow(() -> new TestException("Company name was not found in the list"))
+        .click();
+  }
+
+  public void closeForm() {
+    closeButton.click();
+  }
+
+  public void saveForm() {
+    saveButton.click();
   }
 }
