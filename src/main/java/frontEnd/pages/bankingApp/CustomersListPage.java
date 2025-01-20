@@ -3,8 +3,8 @@ package frontEnd.pages.bankingApp;
 import frontEnd.components.CustomersTableComponent;
 import frontEnd.models.bankingApp.customers.CustomersTable;
 import frontEnd.models.bankingApp.customers.CustomersTableLine;
-import org.openqa.selenium.WebDriver;
 import frontEnd.pages.BasePage;
+import org.openqa.selenium.WebDriver;
 
 public class CustomersListPage extends BasePage {
   private CustomersTableComponent customersTableComponent;
@@ -13,12 +13,13 @@ public class CustomersListPage extends BasePage {
     super(webDriver);
   }
 
-  public CustomersTable getCustomersTable() {
+  public CustomersTable readAndGetCustomersTable() {
     customersTableComponent.isTableLoaded();
     return customersTableComponent.readCustomersTable();
   }
 
-  public void deleteCustomerFromLine(CustomersTableLine customersTableLine) {
+  public CustomersListPage deleteCustomerFromLine(CustomersTableLine customersTableLine) {
     customersTableLine.getDeleteCustomer().click();
+    return this;
   }
 }

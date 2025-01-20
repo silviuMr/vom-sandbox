@@ -1,12 +1,13 @@
+import static frontEnd.enums.Url.*;
 import static org.testng.Assert.*;
 
 import frontEnd.enums.UserRoles;
-import lombok.extern.slf4j.Slf4j;
 import frontEnd.models.protractorApp.webTable.AngularWebTable;
 import frontEnd.models.protractorApp.webTable.AngularWebTableLine;
+import frontEnd.pages.protractorApp.AngularWebTablePage;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.TestException;
 import org.testng.annotations.Test;
-import frontEnd.pages.protractorApp.AngularWebTablePage;
 
 @Slf4j
 public class WebTablesTest extends BaseTest {

@@ -14,6 +14,7 @@
         <selenium.version>4.27.0</selenium.version>
         <lombok.version>1.18.34</lombok.version>
         <testng.version>7.10.2</testng.version>
+        <apache-commons.version>3.14.0</apache-commons.version>
     </properties>
 
     <dependencies>
@@ -31,6 +32,11 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache-commons.version}</version>
         </dependency>
     </dependencies>
 
