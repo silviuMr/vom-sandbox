@@ -2,7 +2,7 @@ package frontEnd.components;
 
 import static java.util.stream.Collectors.*;
 
-import frontEnd.enums.UserRoles;
+import enums.UserRoles;
 import java.util.List;
 import frontEnd.models.protractorApp.form.EditUserForm;
 import org.openqa.selenium.WebDriver;

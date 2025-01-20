@@ -2,7 +2,7 @@ package frontEnd.pages.protractorApp;
 
 import frontEnd.components.EditUserComponent;
 import frontEnd.components.HomepageTableComponent;
-import frontEnd.enums.UserRoles;
+import enums.UserRoles;
 import frontEnd.models.protractorApp.form.EditUserForm;
 import frontEnd.models.protractorApp.webTable.AngularWebTable;
 import org.openqa.selenium.WebDriver;

@@ -1,7 +1,7 @@
-import static frontEnd.enums.Url.*;
+import static enums.Url.WEBTABLE_HOMEPAGE_URL;
 import static org.testng.Assert.*;
 
-import frontEnd.enums.UserRoles;
+import enums.UserRoles;
 import frontEnd.models.protractorApp.webTable.AngularWebTable;
 import frontEnd.models.protractorApp.webTable.AngularWebTableLine;
 import frontEnd.pages.protractorApp.AngularWebTablePage;

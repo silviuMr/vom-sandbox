@@ -1,4 +1,4 @@
-import static frontEnd.enums.Url.BANKING_HOMEPAGE_URL;
+import static enums.Url.BANKING_HOMEPAGE_URL;
 import static org.testng.Assert.*;
 
 import frontEnd.models.bankingApp.customers.CustomersTable;
