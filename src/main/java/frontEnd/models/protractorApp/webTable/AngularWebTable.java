@@ -1,4 +1,4 @@
-package models.webTable;
+package frontEnd.models.protractorApp.webTable;
 
 import java.util.List;
 import lombok.Builder;

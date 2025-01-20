@@ -1,16 +1,18 @@
-package components;
+package frontEnd.components;
 
 import static java.util.stream.Collectors.*;
 
-import enums.UserRoles;
+import frontEnd.enums.UserRoles;
 import java.util.List;
-import models.form.EditUserForm;
+import frontEnd.models.protractorApp.form.EditUserForm;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.TestException;
+import frontEnd.pages.BasePage;
 
-public class EditUserComponent {
+public class EditUserComponent extends BasePage {
   @FindBy(xpath = "//input[@name='FirstName']")
   private WebElement firstName;
 
@@ -43,6 +45,10 @@ public class EditUserComponent {
 
   @FindBy(xpath = "//form[@name='smartTableValidForm']")
   private WebElement formElement;
+
+  public EditUserComponent(WebDriver webDriver) {
+    super(webDriver);
+  }
 
   public boolean isFormLoaded() {
     return formElement.isDisplayed();

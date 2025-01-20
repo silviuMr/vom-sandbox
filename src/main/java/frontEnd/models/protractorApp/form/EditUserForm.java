@@ -1,4 +1,4 @@
-package models.form;
+package frontEnd.models.protractorApp.form;
 
 import java.util.List;
 import lombok.Builder;

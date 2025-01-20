@@ -1,25 +1,25 @@
-package pages;
+package frontEnd.pages.protractorApp;
 
-import components.EditUserComponent;
-import components.HomepageTableComponent;
-import enums.UserRoles;
-import models.form.EditUserForm;
-import models.webTable.AngularWebTable;
+import frontEnd.components.EditUserComponent;
+import frontEnd.components.HomepageTableComponent;
+import frontEnd.enums.UserRoles;
+import frontEnd.models.protractorApp.form.EditUserForm;
+import frontEnd.models.protractorApp.webTable.AngularWebTable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import frontEnd.pages.BasePage;
 
-public class AngularWebTablePage {
-  private final EditUserComponent editUserComponent = new EditUserComponent();
-  private final HomepageTableComponent homepageTableComponent = new HomepageTableComponent();
-
-  public AngularWebTablePage(WebDriver driver) {
-    PageFactory.initElements(driver, this);
-  }
+public class AngularWebTablePage extends BasePage {
+  private final EditUserComponent editUserComponent = new EditUserComponent(driver);
+  private final HomepageTableComponent homepageTableComponent = new HomepageTableComponent(driver);
 
   @FindBy(xpath = "//table[@table-title='Smart Table example']")
   private WebElement tableElement;
+
+  public AngularWebTablePage(WebDriver driver) {
+    super(driver);
+  }
 
   public boolean isEditUserDialogOpened() {
     return editUserComponent.isFormLoaded();
