@@ -75,5 +75,5 @@ updated, finishing with an album delete.
 #### JsonPlaceholderTest
 
 Backend test class, verifies the existence of a user with the username “Karianne,” then adds a new
-post. A test for an
-API endpoint that fails if the response time exceeds a given threshold is also present in the class.
+post. A test for timing the response of an API endpoint, that fails if the response time exceeds a
+given threshold, is also present in the class.

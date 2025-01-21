@@ -6,12 +6,19 @@ import frontEnd.models.protractorApp.webTable.AngularWebTable;
 import frontEnd.models.protractorApp.webTable.AngularWebTableLine;
 import frontEnd.pages.protractorApp.AngularWebTablePage;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.TestException;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 @Slf4j
 public class WebTablesTest extends BaseTest {
+
+  @BeforeTest
+  public void beforeTest() {
+    driver = new ChromeDriver();
+    driver.manage().window().maximize();
+  }
 
   @Test
   public void checkEditingUserDetails() {
@@ -28,10 +35,9 @@ public class WebTablesTest extends BaseTest {
 
     log.info("Verify if the name exists in the table");
     assertTrue(
-            angularWebTableInitialState.getTableLines().stream()
-                .anyMatch(tl -> tl.getLastName().equals("Novak")
-                        && tl.getFirstName().equals("Mark")),
-            "The name Mark Novak cannot be found in the table");
+        angularWebTableInitialState.getTableLines().stream()
+            .anyMatch(tl -> tl.getLastName().equals("Novak") && tl.getFirstName().equals("Mark")),
+        "The name Mark Novak cannot be found in the table");
 
     log.info("Opening user details for Mark Novak");
     angularWebTableInitialState.getTableLines().stream()

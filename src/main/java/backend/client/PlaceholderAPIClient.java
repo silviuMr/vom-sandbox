@@ -1,37 +1,34 @@
 package backend.client;
 
-import io.restassured.response.Response;
+import static enums.Url.*;
+import static io.restassured.RestAssured.given;
 
-import java.util.Map;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 public class PlaceholderAPIClient implements APIClient {
   @Override
   public Response get(String endpoint) {
-    return null;
-  }
-
-  @Override
-  public Response get(String endpoint, String query) {
-    return null;
-  }
-
-  @Override
-  public Response get(String endpoint, Map<String, String> queryParams) {
-    return null;
+    return given().baseUri(JSON_API_URL.getUrl()).basePath(endpoint).accept(ContentType.JSON).get();
   }
 
   @Override
   public Response post(String endpoint, String body) {
+    return given()
+        .baseUri(JSON_API_URL.getUrl())
+        .basePath(endpoint)
+        .body(body)
+        .accept(ContentType.JSON)
+        .post();
+  }
+
+  @Override
+  public Response delete(String endpoint) {
     return null;
   }
 
   @Override
-  public Response delete(String endpoint, String query) {
-    return null;
-  }
-
-  @Override
-  public Response patch(String endpoint, String id, String body) {
+  public Response patch(String endpoint, String body) {
     return null;
   }
 }

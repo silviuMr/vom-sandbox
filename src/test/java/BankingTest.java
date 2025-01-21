@@ -8,12 +8,19 @@ import frontEnd.pages.bankingApp.BankingHomePage;
 import frontEnd.pages.bankingApp.CustomersListPage;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.TestException;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 @Slf4j
 public class BankingTest extends BaseTest {
+
+  @BeforeTest
+  public void beforeTest() {
+    driver = new ChromeDriver();
+    driver.manage().window().maximize();
+  }
 
   @Test
   public void verifyUserCreationAndDeletion() {

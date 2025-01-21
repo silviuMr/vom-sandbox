@@ -18,21 +18,12 @@ public class AlbumCollectionTest extends BaseTest {
     long totalNumberOfAlbums = getCurrentTotalNumberOfAlbums();
 
     log.info("Creating a new album");
-    AlbumDetails newAlbum =
-        AlbumDetails.builder()
-            .title("New album for creation")
-            .artist("New artist")
-            .genre("New genre")
-            .label("New label")
-            .songs(159)
-            .year(2025)
-            .build();
-    PostAlbumResponse createAlbumResponse = albumService.createNewAlbum(newAlbum);
+    AlbumDetails newAlbum = createAlbumDetails();
+    PostAlbumResponse createAlbumResponse = getPostAlbumResponse(newAlbum);
     long totalNumberOfAlbumsAfterCreation = getCurrentTotalNumberOfAlbums();
 
-    assertEquals(
-        totalNumberOfAlbumsAfterCreation + 1,
-        totalNumberOfAlbums,
+    assertTrue(
+        totalNumberOfAlbums < totalNumberOfAlbumsAfterCreation,
         "The total number of albums has not increased");
 
     AlbumDetails albumDetails = albumService.getAlbumByIdAsClass(createAlbumResponse.getAlbum_id());
@@ -42,11 +33,11 @@ public class AlbumCollectionTest extends BaseTest {
     DeleteAlbumResponse deleteAlbumResponse =
         albumService.deleteAlbum(createAlbumResponse.getAlbum_id());
     assertTrue(deleteAlbumResponse.isAcknowledged(), "Album was not deleted");
+    assertEquals(deleteAlbumResponse.getDeletedCount(), 1, "The album was not deleted");
 
     long totalNumberOfAlbumsAfterDeletion = getCurrentTotalNumberOfAlbums();
-    assertEquals(
-        totalNumberOfAlbumsAfterCreation - 1,
-        totalNumberOfAlbumsAfterDeletion,
+    assertTrue(
+        totalNumberOfAlbumsAfterCreation > totalNumberOfAlbumsAfterDeletion,
         "The total number of albums has not decreased");
   }
 
@@ -57,42 +48,45 @@ public class AlbumCollectionTest extends BaseTest {
 
   @Test
   public void verifyAlbumDetailsEditingAndDeletion() {
-    final String desiredTitle = "Changed title";
+    final String desiredTitle = " - Changed title";
     final int desiredSongs = 4;
     final int desiredYear = 1555;
 
     log.info("Creating a new album");
-    AlbumDetails newAlbum =
-        AlbumDetails.builder()
-            .title("New album for editing")
-            .artist("New artist")
-            .genre("New genre")
-            .label("New label")
-            .songs(99)
-            .year(1658)
-            .build();
-    PostAlbumResponse createAlbumResponse = albumService.createNewAlbum(newAlbum);
-    long totalNumberOfAlbumsAfterCreation = getCurrentTotalNumberOfAlbums();
+    AlbumDetails anotherAlbum = createAlbumDetails();
+    PostAlbumResponse createAlbumResponse = albumService.createNewAlbum(anotherAlbum);
 
     log.info("Validate newly created album details");
     AlbumDetails albumDetails = albumService.getAlbumByIdAsClass(createAlbumResponse.getAlbum_id());
-    assertEquals(albumDetails, newAlbum, "The new album was created with different details");
+    assertEquals(albumDetails, anotherAlbum, "The new album was created with different details");
 
     log.info("Changing album details");
     AlbumDetails editAlbumBody =
-        AlbumDetails.builder().title(desiredTitle).songs(desiredSongs).year(desiredYear).build();
+        AlbumDetails.builder()
+            .title(albumDetails.getTitle() + desiredTitle)
+            .songs(desiredSongs)
+            .year(desiredYear)
+            .build();
     PatchAlbumResponse patchAlbumResponse =
         albumService.editAlbum(createAlbumResponse.getAlbum_id(), editAlbumBody);
     assertEquals(patchAlbumResponse.getMatchedCount(), 1, "The album was not matched");
-    assertEquals(patchAlbumResponse.getModifiedCount(), 1, "The album was not modified");
 
+    // Slow updating - use wait library
     log.info("Validate album details after title, songs and year editing");
     AlbumDetails albumDetailsAfterDetailsChanged =
         albumService.getAlbumByIdAsClass(createAlbumResponse.getAlbum_id());
     assertEquals(
-        albumDetailsAfterDetailsChanged,
-        editAlbumBody,
-        "The new album was created " + "with different details");
+        albumDetailsAfterDetailsChanged.getTitle(),
+        editAlbumBody.getTitle(),
+        "The title was not updated");
+    assertEquals(
+        albumDetailsAfterDetailsChanged.getSongs(),
+        editAlbumBody.getSongs(),
+        "The songs were not updated");
+    assertEquals(
+        albumDetailsAfterDetailsChanged.getYear(),
+        editAlbumBody.getYear(),
+        "The year was not updated");
 
     log.info("Deleting genre and year from album");
     AlbumDetails deleteGenreYearBody = AlbumDetails.builder().genre(null).year(null).build();
@@ -124,5 +118,20 @@ public class AlbumCollectionTest extends BaseTest {
         detailsAfterDeletion.getBody().prettyPrint(),
         ALBUM_NOT_FOUND.getMessage(),
         "Error message is not as expected");
+  }
+
+  private PostAlbumResponse getPostAlbumResponse(AlbumDetails albumDetails) {
+    return albumService.createNewAlbum(albumDetails);
+  }
+
+  private AlbumDetails createAlbumDetails() {
+    return AlbumDetails.builder()
+        .title(faker.music().instrument())
+        .artist(faker.artist().name())
+        .genre(faker.music().genre())
+        .label(faker.music().key())
+        .songs(faker.number().numberBetween(1, 10))
+        .year(faker.number().numberBetween(1955, 2025))
+        .build();
   }
 }

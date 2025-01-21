@@ -17,6 +17,7 @@
         <apache-commons.version>3.14.0</apache-commons.version>
         <rest-assured.version>5.5.0</rest-assured.version>
         <jackson.version>2.18.2</jackson.version>
+        <java-faker.version>1.0.2</java-faker.version>
     </properties>
 
     <dependencies>
@@ -49,6 +50,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${java-faker.version}</version>
         </dependency>
     </dependencies>
 

@@ -18,10 +18,6 @@ public class AlbumService {
     return apiClient.get(GET_POST_ALBUM).as(new TypeRef<>() {});
   }
 
-  public Response getAllAlbums() {
-    return apiClient.get(GET_POST_ALBUM);
-  }
-
   public AlbumDetails getAlbumByIdAsClass(String id) {
     return apiClient.get(format(GET_PUT_PATCH_SPECIFIC_ALBUM, id)).as(AlbumDetails.class);
   }
@@ -46,11 +42,13 @@ public class AlbumService {
   }
 
   public DeleteAlbumResponse deleteAlbum(String id) {
-    return apiClient.delete(DELETE_ALBUM, id).as(DeleteAlbumResponse.class);
+    return apiClient.delete(format(DELETE_ALBUM, id)).as(DeleteAlbumResponse.class);
   }
 
   public PatchAlbumResponse editAlbum(String id, AlbumDetails albumDetails) {
     String body = getStringFromBody(albumDetails);
-    return apiClient.patch(GET_PUT_PATCH_SPECIFIC_ALBUM, id, body).as(PatchAlbumResponse.class);
+    return apiClient
+        .patch(format(GET_PUT_PATCH_SPECIFIC_ALBUM, id), body)
+        .as(PatchAlbumResponse.class);
   }
 }
