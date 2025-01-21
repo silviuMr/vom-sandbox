@@ -29,4 +29,9 @@ public class PlaceholderAPIClient implements APIClient {
   public Response delete(String endpoint, String query) {
     return null;
   }
+
+  @Override
+  public Response patch(String endpoint, String id, String body) {
+    return null;
+  }
 }

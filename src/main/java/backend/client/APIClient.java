@@ -14,4 +14,6 @@ public interface APIClient {
   Response post(String endpoint, String body);
 
   Response delete(String endpoint, String query);
+
+  Response patch(String endpoint, String id, String body);
 }

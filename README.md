@@ -22,7 +22,7 @@ git clone https://github.com/silviuMr/vom-sandbox.git```
 Navigate to the project directory, then build the project using Maven
 
 ```
-cd ~\java-testing-framework
+cd ~\vom-sandbox
 mvn clean install -DskipTests
 ```
 

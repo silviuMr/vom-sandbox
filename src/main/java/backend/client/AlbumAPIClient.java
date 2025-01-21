@@ -10,17 +10,20 @@ import java.util.Map;
 public class AlbumAPIClient implements APIClient {
   @Override
   public Response get(String endpoint) {
-    return given().baseUri(ALBUM_API_URL.getUrl())
-            .accept(ContentType.JSON)
-            .get(endpoint);
+    return given()
+        .baseUri(ALBUM_API_URL.getUrl())
+        .basePath(endpoint)
+        .accept(ContentType.JSON)
+        .get();
   }
 
   @Override
   public Response get(String endpoint, String query) {
     return given()
-            .baseUri(ALBUM_API_URL.getUrl())
-            .contentType(ContentType.ANY)
-            .get(endpoint, query);
+        .baseUri(ALBUM_API_URL.getUrl())
+        .basePath(endpoint)
+        .contentType(ContentType.ANY)
+        .get(query);
   }
 
   @Override
@@ -30,11 +33,22 @@ public class AlbumAPIClient implements APIClient {
 
   @Override
   public Response post(String endpoint, String body) {
-    return given().baseUri(ALBUM_API_URL.getUrl()).post(endpoint, body);
+    return given()
+        .baseUri(ALBUM_API_URL.getUrl())
+        .basePath(endpoint)
+        .accept(ContentType.JSON)
+        .contentType(ContentType.JSON)
+        .body(body)
+        .post();
   }
 
   @Override
   public Response delete(String endpoint, String query) {
-    return given().baseUri(ALBUM_API_URL.getUrl()).delete(endpoint, query);
+    return given().baseUri(ALBUM_API_URL.getUrl()).basePath(endpoint).delete(query);
+  }
+
+  @Override
+  public Response patch(String endpoint, String id, String body) {
+    return given().baseUri(ALBUM_API_URL.getUrl()).basePath(endpoint).patch(id, body);
   }
 }
