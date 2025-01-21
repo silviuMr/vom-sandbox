@@ -7,10 +7,11 @@ import frontEnd.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
 public class CustomersListPage extends BasePage {
-  private CustomersTableComponent customersTableComponent;
+  private final CustomersTableComponent customersTableComponent;
 
   public CustomersListPage(WebDriver webDriver) {
     super(webDriver);
+    customersTableComponent = new CustomersTableComponent(driver);
   }
 
   public CustomersTable readAndGetCustomersTable() {

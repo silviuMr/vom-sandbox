@@ -6,6 +6,8 @@ import backend.model.response.DeleteAlbumResponse;
 import backend.model.response.GetAllAlbumsResponse;
 import backend.model.response.PostAlbumResponse;
 import java.util.Arrays;
+
+import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 

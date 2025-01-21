@@ -13,8 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import frontEnd.pages.BasePage;
 
 public class CustomersTableComponent extends BasePage {
-  //  private CustomersTableLine customersTableLine;
-
   @FindBy(xpath = "//table/tbody")
   private WebElement tableBody;
 
@@ -26,21 +24,21 @@ public class CustomersTableComponent extends BasePage {
   }
 
   public boolean isTableLoaded() {
-    return tableBody.isDisplayed();
+    return waitUntilVisible(tableBody).isDisplayed();
   }
 
   public CustomersTable readCustomersTable() {
     List<CustomersTableLine> customersTableLineList = new ArrayList<>();
 
     waitUntilVisible(tableBody);
-    String commonSelector = "//tbody/tr/td[%d]";
-    String buttonSelector = "//tbody/tr/td[5]//button[text()='Delete']";
+    String commonSelector = "//tbody/tr[%d]/td[%d]";
+    String buttonSelector = "//tbody/tr[%d]/td[5]//button[text()='Delete']";
 
     for (int i = 0; i < tableLine.size(); i++) {
-      WebElement firstName = driver.findElement(xpath(format(commonSelector, 1)));
-      WebElement lastName = driver.findElement(xpath(format(commonSelector, 2)));
-      WebElement postCode = driver.findElement(xpath(format(commonSelector, 3)));
-      WebElement deleteButton = driver.findElement(xpath(format(buttonSelector)));
+      WebElement firstName = driver.findElement(xpath(format(commonSelector, i+1, 1)));
+      WebElement lastName = driver.findElement(xpath(format(commonSelector, i+1, 2)));
+      WebElement postCode = driver.findElement(xpath(format(commonSelector, i+1, 3)));
+      WebElement deleteButton = driver.findElement(xpath(format(buttonSelector, i+1)));
 
       customersTableLineList.add(
           CustomersTableLine.builder()

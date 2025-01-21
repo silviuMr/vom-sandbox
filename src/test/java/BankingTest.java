@@ -9,6 +9,7 @@ import frontEnd.pages.bankingApp.CustomersListPage;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.TestException;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Slf4j

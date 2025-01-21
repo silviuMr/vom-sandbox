@@ -7,6 +7,7 @@ import frontEnd.models.protractorApp.webTable.AngularWebTableLine;
 import frontEnd.pages.protractorApp.AngularWebTablePage;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.TestException;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Slf4j
@@ -25,12 +26,12 @@ public class WebTablesTest extends BaseTest {
     log.info("Reading table");
     AngularWebTable angularWebTableInitialState = angularWebTablePage.readHomepageTable();
 
-    //    log.info("Verify if the name exists in the table");
-    //    assertTrue(
-    //        angularWebTableInitialState.getTableLines().stream()
-    //            .anyMatch(tl -> tl.getLastName().equals("Novak") &&
-    // tl.getFirstName().equals("Mark")),
-    //        "The name Mark Novak cannot be found in the table");
+    log.info("Verify if the name exists in the table");
+    assertTrue(
+            angularWebTableInitialState.getTableLines().stream()
+                .anyMatch(tl -> tl.getLastName().equals("Novak")
+                        && tl.getFirstName().equals("Mark")),
+            "The name Mark Novak cannot be found in the table");
 
     log.info("Opening user details for Mark Novak");
     angularWebTableInitialState.getTableLines().stream()
@@ -40,9 +41,6 @@ public class WebTablesTest extends BaseTest {
         .getEditUserButton()
         .click();
     assertTrue(angularWebTablePage.isEditUserDialogOpened(), "Edit user window is not present");
-
-    //    log.info("Reading user details modal");
-    //    EditUserForm editUserFormInitialState = angularWebTablePage.readEditUserForm();
 
     log.info("Change user role");
     angularWebTablePage.changeUserRole(desiredNewRole);
@@ -88,6 +86,6 @@ public class WebTablesTest extends BaseTest {
     assertEquals(
         changedLineWithNewCompany.getCustomer(),
         desiredNewCompany,
-        "The customer does not match the desired new company name");
+        "The customer details do not match the desired new company name");
   }
 }

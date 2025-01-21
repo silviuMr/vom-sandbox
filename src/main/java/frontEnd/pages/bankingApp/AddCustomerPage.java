@@ -30,7 +30,7 @@ public class AddCustomerPage extends BasePage {
   }
 
   public AddCustomerPage goToAddCustomerPage() {
-    addNewCustomerHeaderButton.click();
+    waitUntilVisible(addNewCustomerHeaderButton).click();
     return this;
   }
 
@@ -48,10 +48,11 @@ public class AddCustomerPage extends BasePage {
   }
 
   public String addNewCustomerAndGetId(String firstName, String lastName, String postCode) {
-    firstNameInput.sendKeys(firstName);
-    lastNameInput.sendKeys(lastName);
-    postCodeInput.sendKeys(postCode);
-    addNewCustomerButton.click();
+    goToAddCustomerPage();
+    waitUntilVisible(firstNameInput).sendKeys(firstName);
+    waitUntilVisible(lastNameInput).sendKeys(lastName);
+    waitUntilVisible(postCodeInput).sendKeys(postCode);
+    waitUntilVisible(addNewCustomerButton).click();
 
     String alertMessage = getAlertMessage();
     acceptAlert();

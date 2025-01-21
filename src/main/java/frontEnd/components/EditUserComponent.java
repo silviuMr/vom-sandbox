@@ -51,10 +51,11 @@ public class EditUserComponent extends BasePage {
   }
 
   public boolean isFormLoaded() {
-    return formElement.isDisplayed();
+    return waitUntilVisible(formElement).isDisplayed();
   }
 
   public EditUserForm readEditUserForm() {
+    waitUntilVisible(formElement);
     return EditUserForm.builder()
         .firstName(firstName.getText())
         .lastName(lastName.getText())
@@ -78,23 +79,24 @@ public class EditUserComponent extends BasePage {
   }
 
   public void changeUserRoleTo(UserRoles roleName) {
+    waitUntilVisible(role);
     Select roleSelect = new Select(role);
-    roleSelect.selectByValue(roleName.name());
+    roleSelect.selectByVisibleText(roleName.getRole());
   }
 
   public void changeUserCompanyTo(String companyName) {
     customerList.stream()
-        .filter(cn -> cn.getText().equals(companyName))
+        .filter(cn -> cn.getAccessibleName().equals(companyName))
         .findFirst()
         .orElseThrow(() -> new TestException("Company name was not found in the list"))
         .click();
   }
 
   public void closeForm() {
-    closeButton.click();
+    waitUntilVisible(closeButton).click();
   }
 
   public void saveForm() {
-    saveButton.click();
+    waitUntilVisible(saveButton).click();
   }
 }

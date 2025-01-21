@@ -26,7 +26,7 @@ public class AngularWebTablePage extends BasePage {
   }
 
   public boolean hasPageLoaded() {
-    return tableElement.isDisplayed();
+    return waitUntilVisible(tableElement).isDisplayed();
   }
 
   public AngularWebTable readHomepageTable() {

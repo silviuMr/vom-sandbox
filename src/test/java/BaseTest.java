@@ -3,6 +3,7 @@ import backend.service.PlaceholderService;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 
 @Slf4j
 public class BaseTest {
@@ -10,13 +11,8 @@ public class BaseTest {
   AlbumService albumService = new AlbumService();
   PlaceholderService placeholderService = new PlaceholderService();
 
-  //  @BeforeClass
-  //  public void setUp() {
-  //    driver.manage().window().maximize();
-  //  }
-
-  //  @AfterClass
-  //  public void quitDriver() {
-  //    driver.quit();
-  //  }
+    @AfterClass
+    public void quitDriver() {
+      driver.quit();
+    }
 }

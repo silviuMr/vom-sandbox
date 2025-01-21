@@ -30,7 +30,6 @@ public class AlbumService {
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
     }
-    //      albumDetails.
     return apiClient.post(GET_POST_ALBUM, bodyAsString).as(PostAlbumResponse.class);
   }
 

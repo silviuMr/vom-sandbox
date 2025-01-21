@@ -14,7 +14,7 @@ public class BankingHomePage extends BasePage {
   }
 
   public AddCustomerPage logInAsManager() {
-    managerLoginButton.click();
+    waitUntilVisible(managerLoginButton).click();
     return new AddCustomerPage(driver);
   }
 }
