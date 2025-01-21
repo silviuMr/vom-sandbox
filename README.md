@@ -7,6 +7,7 @@ RestAssured. The project also utilizes Lombok to reduce boilerplate code.
 ### Prerequisites
 
 Java 21 or higher
+
 Maven 3.6.0 or higher
 
 ### Installation
@@ -14,7 +15,7 @@ Maven 3.6.0 or higher
 Clone the repository:
 
 ```
-git clone https://github.com/silviuMr/vom-sandbox.git```
+git clone https://github.com/silviuMr/vom-sandbox.git
 ```
 
 ### Build
